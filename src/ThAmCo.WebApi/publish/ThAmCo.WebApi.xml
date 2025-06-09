@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ThAmCo.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:ThAmCo.WebApi.Controllers.AuthController.Register(ThAmCo.WebApi.DTOs.RegisterDto)">
+            <summary>
+            Register a new customer
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.AuthController.Login(ThAmCo.WebApi.DTOs.LoginDto)">
+            <summary>
+            Customer login
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.AuthController.StaffLogin(ThAmCo.WebApi.DTOs.LoginDto)">
+            <summary>
+            Staff login
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.AuthController.RefreshToken(ThAmCo.WebApi.DTOs.RefreshTokenDto)">
+            <summary>
+            Refresh JWT token
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.GetProfile">
+            <summary>
+            Get current customer profile
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.UpdateProfile(ThAmCo.WebApi.DTOs.UpdateCustomerDto)">
+            <summary>
+            Update customer profile
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.GetFunds">
+            <summary>
+            Get customer account funds
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.DeleteAccount">
+            <summary>
+            Request account deletion
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.GetAllCustomers(System.Int32,System.Int32)">
+            <summary>
+            Get all customers (Staff only)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.GetCustomer(System.Int32)">
+            <summary>
+            Get specific customer details (Staff only)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.AddFunds(ThAmCo.WebApi.DTOs.AddFundsDto)">
+            <summary>
+            Add funds to customer account (Staff only)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.CustomerAddFunds(ThAmCo.WebApi.DTOs.CustomerAddFundsDto)">
+            <summary>
+            Add funds to customer account (Customer self-service)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.CustomersController.DeleteCustomer(System.Int32)">
+            <summary>
+            Delete customer account (Staff only)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.OrdersController.CreateOrder(ThAmCo.WebApi.DTOs.CreateOrderDto)">
+            <summary>
+            Create a new order
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.OrdersController.GetOrderHistory(System.Int32,System.Int32)">
+            <summary>
+            Get customer's order history
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.OrdersController.GetOrder(System.Int32)">
+            <summary>
+            Get specific order details
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.OrdersController.GetPendingDispatchOrders(System.Int32,System.Int32)">
+            <summary>
+            Get orders pending dispatch (Staff only)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.OrdersController.DispatchOrder(System.Int32)">
+            <summary>
+            Mark order as dispatched (Staff only)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.OrdersController.GetAllOrders(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get all orders (Staff only)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.ProductsController.GetProducts(System.String,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Get all products with optional filtering and search
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.ProductsController.GetProduct(System.Int32)">
+            <summary>
+            Get a specific product by ID
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.ProductsController.SearchProducts(System.String,System.Int32,System.Int32)">
+            <summary>
+            Search products by name and description
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.ProductsController.GetCategories">
+            <summary>
+            Get product categories
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.ProductsController.GetProductStock(System.Int32)">
+            <summary>
+            Get stock status for a product (updated every 5 minutes)
+            </summary>
+        </member>
+        <member name="M:ThAmCo.WebApi.Controllers.ProductsController.RestockProduct(System.Int32,ThAmCo.WebApi.DTOs.RestockProductDto)">
+            <summary>
+            Restock a product (Staff only)
+            </summary>
+        </member>
+        <member name="T:ThAmCo.WebApi.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:ThAmCo.WebApi.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThAmCo.WebApi.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThAmCo.WebApi.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ThAmCo.WebApi.Migrations.UpdateCustomerSeedData">
+            <inheritdoc />
+        </member>
+        <member name="M:ThAmCo.WebApi.Migrations.UpdateCustomerSeedData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThAmCo.WebApi.Migrations.UpdateCustomerSeedData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThAmCo.WebApi.Migrations.UpdateCustomerSeedData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

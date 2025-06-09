@@ -1,0 +1,113 @@
+{
+  "MonitoringConfiguration": {
+    "HealthChecks": {
+      "Enabled": true,
+      "Interval": "00:01:00",
+      "Timeout": "00:00:30",
+      "Endpoints": [
+        {
+          "Name": "Database",
+          "Type": "SqlServer",
+          "ConnectionString": "Server=.\\SQLEXPRESS;Database=ThAmCoSystem;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=true",
+          "Query": "SELECT 1"
+        },
+        {
+          "Name": "API",
+          "Type": "Http",
+          "Url": "https://localhost:5001/health",
+          "ExpectedStatusCode": 200
+        },
+        {
+          "Name": "Background Services",
+          "Type": "Custom",
+          "CheckType": "StockUpdateService"
+        }
+      ]
+    },
+    "PerformanceCounters": {
+      "Enabled": true,
+      "Interval": "00:05:00",
+      "Counters": [
+        {
+          "Category": "Process",
+          "Counter": "% Processor Time",
+          "Instance": "ThAmCo.WebApi"
+        },
+        {
+          "Category": "Process",
+          "Counter": "Working Set",
+          "Instance": "ThAmCo.WebApi"
+        },
+        {
+          "Category": ".NET CLR Memory",
+          "Counter": "# Bytes in all Heaps",
+          "Instance": "ThAmCo.WebApi"
+        },
+        {
+          "Category": "ASP.NET Core",
+          "Counter": "Requests Per Second",
+          "Instance": "_Total"
+        }
+      ]
+    },
+    "Logging": {
+      "EventLog": {
+        "Enabled": true,
+        "Source": "ThAmCo.WebApi",
+        "LogLevel": "Information"
+      },
+      "FileLogging": {
+        "Enabled": true,
+        "Path": "C:\\Logs\\ThAmCo",
+        "MaxFileSize": "10MB",
+        "MaxFiles": 10,
+        "LogLevel": "Information"
+      },
+      "DatabaseLogging": {
+        "Enabled": true,
+        "ConnectionString": "Server=.\\SQLEXPRESS;Database=ThAmCoSystem;Trusted_Connection=true;MultipleActiveResultSets=true;TrustServerCertificate=true",
+        "TableName": "ApplicationLogs",
+        "LogLevel": "Warning"
+      }
+    },
+    "Alerts": {
+      "Email": {
+        "Enabled": false,
+        "SmtpServer": "smtp.company.com",
+        "Port": 587,
+        "Username": "alerts@company.com",
+        "Password": "encrypted_password",
+        "Recipients": ["admin@company.com", "devops@company.com"]
+      },
+      "Thresholds": {
+        "CpuUsage": 80,
+        "MemoryUsage": 85,
+        "ResponseTime": 5000,
+        "ErrorRate": 5
+      }
+    },
+    "Backup": {
+      "Database": {
+        "Enabled": true,
+        "Schedule": "0 2 * * *",
+        "BackupPath": "C:\\Backups\\ThAmCo\\Database",
+        "RetentionDays": 30,
+        "CompressionEnabled": true
+      },
+      "Application": {
+        "Enabled": true,
+        "Schedule": "0 3 * * 0",
+        "BackupPath": "C:\\Backups\\ThAmCo\\Application",
+        "RetentionDays": 90,
+        "IncludeConfigs": true
+      },
+      "Logs": {
+        "Enabled": true,
+        "Schedule": "0 1 * * *",
+        "BackupPath": "C:\\Backups\\ThAmCo\\Logs",
+        "RetentionDays": 365,
+        "CompressionEnabled": true
+      }
+    }
+  }
+}
