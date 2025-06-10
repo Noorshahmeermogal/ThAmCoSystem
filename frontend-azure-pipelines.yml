@@ -12,13 +12,17 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '18.x'
+    versionSpec: '20.x'          # Use Node 20 to satisfy react-router dependencies
   displayName: 'Install Node.js'
+
+- script: npm install
+  workingDirectory: frontend
+  displayName: 'npm install'
 
 - task: AzureStaticWebApp@0
   inputs:
     app_location: 'frontend'
     output_location: 'dist'
     skip_app_build: false
-    app_build_command: 'npm install && npm run build'
+    app_build_command: 'npm run build'     # Just run build here, install done above
     azure_static_web_apps_api_token: '$(AZURE_STATIC_WEB_APPS_API_TOKEN)'
