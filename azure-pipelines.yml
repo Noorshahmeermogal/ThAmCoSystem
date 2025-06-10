@@ -2,18 +2,14 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest' # Use a Windows agent for .NET development
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
-  # Azure App Service details for your backend API
-  azureServiceConnection: 'thamco-api-b1851021-publish-profile' # Use the exact name of your new service connection
-  webAppName: 'thamco-api-b1851021' # Your Backend API App Service name
-  vmImageName: 'windows-latest'
+  azureServiceConnection: 'thamco-api-b1851021-publish-profile'
+  webAppName: 'thamco-api-b1851021'
   dotNetSdkVersion: '8.x'
   projectPath: 'src/ThAmCo.WebApi/ThAmCo.WebApi.csproj'
-  databaseServer: 'thamcosy.database.windows.net'
-  databaseName: 'thamcosystem'
 
 steps:
 - task: UseDotNet@2
@@ -40,7 +36,15 @@ steps:
     command: 'publish'
     projects: '$(projectPath)'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish'
-    zipAfterPublish: true
+
+- task: ArchiveFiles@2
+  displayName: 'Archive publish output'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/publish.zip'
+    verbose: true
 
 - task: AzureWebApp@1
   displayName: 'Deploy Azure Web App'
@@ -48,5 +52,5 @@ steps:
     azureSubscription: '$(azureServiceConnection)'
     appType: 'webApp'
     appName: '$(webAppName)'
-    package: '$(Build.ArtifactStagingDirectory)/publish'
-    deploymentMethod: 'auto' 
+    package: '$(Build.ArtifactStagingDirectory)/publish.zip'
+    deploymentMethod: 'auto'
