@@ -26,7 +26,12 @@ steps:
     npm run build
   displayName: 'Install dependencies and build app'
 
-# Step 3: Deploy to Azure Static Web Apps
+# Step 3: Copy staticwebapp.config.json to dist folder to ensure correct MIME types
+- script: |
+    cp frontend/staticwebapp.config.json frontend/dist/
+  displayName: 'Copy staticwebapp.config.json to dist folder'
+
+# Step 4: Deploy to Azure Static Web Apps
 - task: AzureStaticWebApp@0
   inputs:
     app_location: 'frontend'           # Source folder
