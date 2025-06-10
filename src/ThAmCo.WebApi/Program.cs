@@ -13,7 +13,6 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Log the connection string (useful for debugging, but avoid logging passwords in production)
         Console.WriteLine("USING CONNECTION: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 
         // Add services to the container
@@ -48,7 +47,7 @@ public class Program
             });
         });
 
-        // Configure Entity Framework with SQL Server connection string
+        // Configure Entity Framework
         builder.Services.AddDbContext<ThAmCoContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -100,10 +99,10 @@ public class Program
                 }
                 else
                 {
-                    // Fallback for local development or if FrontendUrl is not set
+                    // For local development fallback
                     policy.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
                 }
             });
         });
@@ -117,16 +116,6 @@ public class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
-
-            // In development, listen on localhost:5000
-            app.Urls.Clear();
-            app.Urls.Add("http://localhost:5000");
-            Console.WriteLine("Development environment detected, hosting on http://localhost:5000");
-        }
-        else
-        {
-            // In production (Azure), do NOT override URLs so Azure manages it
-            Console.WriteLine("Production environment detected, using default hosting URLs");
         }
 
         app.UseCors("AllowSpecificOrigin");
@@ -141,7 +130,7 @@ public class Program
         app.MapControllers();
         app.MapHealthChecks("/health");
 
-        // Ensure database is created and seed default user
+        // Ensure database is created and seed default staff user
         using (var scope = app.Services.CreateScope())
         {
             var context = scope.ServiceProvider.GetRequiredService<ThAmCoContext>();
@@ -153,7 +142,7 @@ public class Program
                 {
                     Name = "Staff User",
                     Email = "staff@thamco.com",
-                    Password = "staff123",
+                    Password = "staff123", // Normally hashed password
                     Role = "Staff",
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow,
@@ -163,7 +152,11 @@ public class Program
             }
         }
 
-        Console.WriteLine("Application started.");
+        // Do NOT override URLs here, Azure sets them automatically
+        //app.Urls.Clear();
+        //app.Urls.Add("http://localhost:5000");
+
+        Console.WriteLine("Application started");
         app.Run();
     }
 }
