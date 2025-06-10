@@ -6,8 +6,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  azureServiceConnection: 'thamco-api-b1851021-publish-profile'
-  webAppName: 'thamco-api-b1851021'
+  azureServiceConnection: 'thamco-api-b1851021-publish-profile'  # Your Azure service connection name
+  webAppName: 'thamco-api-b1851021'                             # Your Azure App Service name
   dotNetSdkVersion: '8.x'
   projectPath: 'src/ThAmCo.WebApi/ThAmCo.WebApi.csproj'
 
@@ -53,4 +53,4 @@ steps:
     appType: 'webApp'
     appName: '$(webAppName)'
     package: '$(Build.ArtifactStagingDirectory)/publish.zip'
-    deploymentMethod: 'auto'
+    deploymentMethod: 'zipDeploy'
