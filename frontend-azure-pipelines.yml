@@ -7,7 +7,7 @@ trigger:
       - frontend/**
 
 variables:
-- group: StaticWebAppSecrets   # Link to the variable group containing AZURE_STATIC_WEB_APPS_API_TOKEN
+- group: StaticWebAppSecrets   # Contains AZURE_STATIC_WEB_APPS_API_TOKEN
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -29,8 +29,8 @@ steps:
 # Step 3: Deploy to Azure Static Web Apps
 - task: AzureStaticWebApp@0
   inputs:
-    app_location: 'frontend'            # Folder where your app source code is
-    output_location: 'dist'             # Folder where the built files are output by Vite
-    skip_app_build: true                # Skip automatic build step (already done)
+    app_location: 'frontend'           # Source folder
+    output_location: 'dist'            # Vite build output folder
+    skip_app_build: true               # We already ran build step
     azure_static_web_apps_api_token: '$(AZURE_STATIC_WEB_APPS_API_TOKEN)'
   displayName: 'Deploy to Azure Static Web App'
